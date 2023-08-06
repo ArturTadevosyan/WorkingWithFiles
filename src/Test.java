@@ -5,23 +5,23 @@ import service.StudentService;
 import java.io.IOException;
 
 public class Test {
-    private static final String URL = "Lesson1.txt";
+    private static final String URL = "Lesson.txt";
 
     public static void main(String[] args) throws IOException {
-        String[] read = FileService.read(URL);
-        Student[] convert = StudentService.convert(read);
+        String[] fileReadInfo = FileService.read(URL);
+        Student[] students = StudentService.convert(fileReadInfo);
 
-        StudentService.createStudentFileByName("", read);
+        StudentService.createStudentFileByName("", fileReadInfo);
 
-        if (convert != null) {
-            Student studentMaxAge = StudentService.maxAge(convert);
-            Student studentMaxMark = StudentService.maxMArk(convert);
-            if (studentMaxAge != null) {
-                FileService.write(URL, "\nMax Age = " + studentMaxAge.toString());
+        if (students != null) {
+            Student eldestStudent = StudentService.eldestStudent(students);
+            Student studentByMaxMark = StudentService.maxByMark(students);
+            if (eldestStudent != null) {
+                FileService.write(URL, "\nMax Age = " + eldestStudent.toString());
             }
 
-            if (studentMaxMark != null) {
-                FileService.write(URL, "\nMax Mark = " + studentMaxMark.toString());
+            if (studentByMaxMark != null) {
+                FileService.write(URL, "\nMax Mark = " + studentByMaxMark.toString());
             }
         } else {
             System.out.println("Read file is empty");

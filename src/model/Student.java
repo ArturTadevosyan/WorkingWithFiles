@@ -5,11 +5,10 @@ public class Student {
     private int year;
     private double mark;
 
-    public Student(String s) {
-        String[] strings = s.split(",");
-        this.name = strings[0];
-        this.year = Integer.parseInt(strings[1]);
-        this.mark = Double.parseDouble(strings[2]);
+    public Student(String name, int year, double mark) {
+        this.name = name;
+        this.year = year;
+        this.mark = mark;
     }
 
     @Override

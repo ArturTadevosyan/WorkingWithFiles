@@ -6,11 +6,11 @@ import java.io.IOException;
 
 public class StudentService {
 
-    public static Student[] convert(String[] text) {
-        if (text.length != 0) {
-            Student[] students = new Student[text.length];
-            for (int i = 0; i < text.length; i++) {
-                students[i] = new Student(text[i]);
+    public static Student[] convert(String[] studentsString) {
+        if (studentsString.length != 0) {
+            Student[] students = new Student[studentsString.length];
+            for (int i = 0; i < studentsString.length; i++) {
+                students[i] = getStudent(studentsString[i]);
             }
             return students;
         } else {
@@ -19,7 +19,7 @@ public class StudentService {
         }
     }
 
-    public static Student maxAge(Student[] students) {
+    public static Student eldestStudent(Student[] students) {
         if (students.length != 0) {
             Student max = students[0];
             for (int i = 1; i < students.length; i++) {
@@ -34,22 +34,35 @@ public class StudentService {
         }
     }
 
-    public static Student maxMArk(Student[] students) {
-        Student maxMark = students[0];
-        for (int i = 1; i < students.length; i++) {
-            if (students[i].getMark() > maxMark.getMark()) {
-                maxMark = students[i];
+    public static Student maxByMark(Student[] students) {
+        if (students.length != 0) {
+            Student max = students[0];
+            for (int i = 1; i < students.length; i++) {
+                if (students[i].getMark() > max.getMark()) {
+                    max = students[i];
+                }
             }
+            return max;
+        } else {
+            System.out.println("Not Correct Student Array (array is empty) , return null ");
+            return null;
         }
-        return maxMark;
     }
 
-    public static void createStudentFileByName(String url, String[] text) throws IOException {
-        for (String s : text) {
-            String studentName = new Student(s).getName();
+    public static void createStudentFileByName(String url, String[] studentInfo) throws IOException {
+        for (String info : studentInfo) {
+            String studentName = getStudent(info).getName();
             String newUrl = url + studentName;
-            FileService.createFile(newUrl, s);
+            FileService.createFile(newUrl, info);
         }
+    }
+
+    public static Student getStudent(String studentInfo) {
+        String[] strings = studentInfo.split(",");
+        String name = strings[0];
+        int year = Integer.parseInt(strings[1]);
+        double mark = Double.parseDouble(strings[2]);
+        return new Student(name, year, mark);
     }
 
 }
