@@ -7,21 +7,31 @@ import java.io.IOException;
 public class StudentService {
 
     public static Student[] convert(String[] text) {
-        Student[] students = new Student[text.length];
-        for (int i = 0; i < text.length; i++) {
-            students[i] = new Student(text[i]);
+        if (text.length != 0) {
+            Student[] students = new Student[text.length];
+            for (int i = 0; i < text.length; i++) {
+                students[i] = new Student(text[i]);
+            }
+            return students;
+        } else {
+            System.out.println("Not Correct String Array ( array is empty ) , return null ");
+            return null;
         }
-        return students;
     }
 
     public static Student maxAge(Student[] students) {
-        Student max = students[0];
-        for (int i = 1; i < students.length; i++) {
-            if (students[i].getYear() < max.getYear()) {
-                max = students[i];
+        if (students.length != 0) {
+            Student max = students[0];
+            for (int i = 1; i < students.length; i++) {
+                if (students[i].getYear() < max.getYear()) {
+                    max = students[i];
+                }
             }
+            return max;
+        } else {
+            System.out.println("Not Correct Student Array (array is empty) , return null ");
+            return null;
         }
-        return max;
     }
 
     public static Student maxMArk(Student[] students) {

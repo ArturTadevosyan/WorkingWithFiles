@@ -12,12 +12,21 @@ public class Test {
         Student[] convert = StudentService.convert(read);
 
         StudentService.createStudentFileByName("", read);
-        Student studentMaxAge = StudentService.maxAge(convert);
-        Student studentMaxMark = StudentService.maxMArk(convert);
 
+        if (convert != null) {
+            Student studentMaxAge = StudentService.maxAge(convert);
+            Student studentMaxMark = StudentService.maxMArk(convert);
+            if (studentMaxAge != null) {
+                FileService.write(URL, "\nMax Age = " + studentMaxAge.toString());
+            }
 
-        FileService.write(URL, "\nmaxAge = " + studentMaxAge.toString());
-        FileService.write(URL, "\nmaxMark = " + studentMaxMark.toString());
+            if (studentMaxMark != null) {
+                FileService.write(URL, "\nMax Mark = " + studentMaxMark.toString());
+            }
+        } else {
+            System.out.println("Read file is empty");
+        }
+
 
     }
 
