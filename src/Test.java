@@ -5,7 +5,7 @@ import service.StudentService;
 import java.io.IOException;
 
 public class Test {
-    public static final String URL = "Lesson1.txt";
+    private static final String URL = "Lesson1.txt";
 
     public static void main(String[] args) throws IOException {
         String[] read = FileService.read(URL);

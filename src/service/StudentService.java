@@ -37,9 +37,8 @@ public class StudentService {
     public static void createStudentFileByName(String url, String[] text) throws IOException {
         for (String s : text) {
             String studentName = new Student(s).getName();
-            url = url + studentName;
-            FileService.createFile(url, s);
-            url = "";
+            String newUrl = url + studentName;
+            FileService.createFile(newUrl, s);
         }
     }
 
